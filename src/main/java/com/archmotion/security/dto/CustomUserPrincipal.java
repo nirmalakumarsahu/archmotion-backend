@@ -1,12 +1,15 @@
 package com.archmotion.security.dto;
 
+import com.archmotion.constant.AppConstants;
 import com.archmotion.entity.User;
 import lombok.Builder;
 import org.jspecify.annotations.NullMarked;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.UUID;
 
 @Builder
@@ -26,7 +29,10 @@ public record CustomUserPrincipal(
                 .email(user.getEmail())
                 .password(user.getPassword())
                 .username(user.getUsername())
-                .authorities(null)
+                .authorities(
+                        Collections.singleton(new SimpleGrantedAuthority(
+                                AppConstants.ROLE_PREFIX + user.getRole()))
+                )
                 .build();
     }
 

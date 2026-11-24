@@ -6,6 +6,8 @@ import org.springframework.security.authentication.AuthenticationCredentialsNotF
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
+import java.util.UUID;
+
 @UtilityClass
 public class SecurityUtil {
 
@@ -21,6 +23,10 @@ public class SecurityUtil {
         throw new AuthenticationCredentialsNotFoundException(
                 "User is not Authenticated"
         );
+    }
+
+    public UUID getCurrentUserUuid() {
+        return getCurrentUser().getUserUuid();
     }
 
 }

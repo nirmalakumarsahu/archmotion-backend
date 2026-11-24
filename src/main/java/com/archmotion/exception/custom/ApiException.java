@@ -15,12 +15,12 @@ public class ApiException extends RuntimeException {
 
     public ApiException(String message) {
         super(message);
-        apiError = ApiError.build();
+        apiError = ApiError.build(message, message, null);
     }
 
     public ApiException(String message, Throwable cause) {
         super(message, cause);
-        apiError = ApiError.build();
+        apiError = ApiError.build(message, message, null);
     }
 
 }

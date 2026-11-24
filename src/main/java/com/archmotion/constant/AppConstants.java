@@ -11,4 +11,5 @@ public class AppConstants {
     public final String KEY_ALGORITHM = "RSA";
 
     public final String TOKEN_TYPE_BEARER = "Bearer";
+    public final String ROLE_PREFIX = "ROLE_";
 }

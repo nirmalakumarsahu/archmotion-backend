@@ -29,10 +29,6 @@ public class CustomJwtAuthenticationConverter implements Converter<Jwt, Abstract
 
         List<String> permissions = jwt.getClaimAsStringList(Claims.PERMISSIONS.getValue());
         log.info("permissions : {}", permissions);
-        assert permissions != null;
-        permissions.stream()
-                .map(SimpleGrantedAuthority::new)
-                .forEach(grantedAuthorities::add);
 
         String username = jwt.getClaimAsString(Claims.USERNAME.getValue());
         String email = jwt.getClaimAsString(Claims.EMAIL.getValue());

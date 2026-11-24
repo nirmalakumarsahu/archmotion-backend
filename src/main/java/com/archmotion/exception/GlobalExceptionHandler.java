@@ -3,7 +3,9 @@ package com.archmotion.exception;
 import com.archmotion.exception.custom.*;
 import com.archmotion.exception.util.ProblemDetailUtil;
 import org.springframework.http.HttpStatus;
+import com.archmotion.exception.dto.ApiError;
 import org.springframework.http.ProblemDetail;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -59,6 +61,12 @@ public class GlobalExceptionHandler {
     public ProblemDetail handleBadRequestException(BadRequestException badRequestException) {
         return ProblemDetailUtil.build(HttpStatus.BAD_REQUEST,
                 badRequestException.getApiError());
+    }
+
+    @ExceptionHandler(AuthenticationException.class)
+    public ProblemDetail handleAuthenticationException(AuthenticationException authenticationException) {
+        return ProblemDetailUtil.build(HttpStatus.UNAUTHORIZED,
+                ApiError.build("User not Authorized", "Invalid username or password", "INVALID_USERNAME_OR_PASSWORD"));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

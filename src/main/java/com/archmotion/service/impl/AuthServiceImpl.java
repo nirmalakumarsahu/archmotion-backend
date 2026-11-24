@@ -14,7 +14,6 @@ import com.archmotion.security.constant.Roles;
 import com.archmotion.security.dto.CustomUserPrincipal;
 import com.archmotion.security.properties.JwtProperties;
 import com.archmotion.security.service.JwtService;
-import com.archmotion.security.util.SecurityUtil;
 import com.archmotion.service.AuthService;
 import com.archmotion.service.RefreshTokenService;
 import lombok.RequiredArgsConstructor;
@@ -54,7 +53,7 @@ public class AuthServiceImpl implements AuthService {
             );
         }
 
-        CustomUserPrincipal user = SecurityUtil.getCurrentUser();
+        CustomUserPrincipal user = (CustomUserPrincipal) authentication.getPrincipal();
         return generateAuthResponse(user);
     }
 
