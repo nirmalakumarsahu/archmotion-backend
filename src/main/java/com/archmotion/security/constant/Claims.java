@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 public enum Claims {
     USERNAME("username"),
     ROLES("roles"),
-    PERMISSIONS("permissions"),
     EMAIL("email");
 
     private final String value;

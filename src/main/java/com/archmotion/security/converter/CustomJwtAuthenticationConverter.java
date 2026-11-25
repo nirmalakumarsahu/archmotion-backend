@@ -1,5 +1,6 @@
 package com.archmotion.security.converter;
 
+import com.archmotion.constant.AppConstants;
 import com.archmotion.security.constant.Claims;
 import com.archmotion.security.dto.CustomUserPrincipal;
 import lombok.extern.slf4j.Slf4j;
@@ -24,11 +25,9 @@ public class CustomJwtAuthenticationConverter implements Converter<Jwt, Abstract
     public AbstractAuthenticationToken convert(Jwt jwt) {
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
 
-        List<String> roles = jwt.getClaimAsStringList(Claims.ROLES.getValue());
+        String roles = jwt.getClaimAsString(Claims.ROLES.getValue());
         log.info("roles : {}", roles);
-
-        List<String> permissions = jwt.getClaimAsStringList(Claims.PERMISSIONS.getValue());
-        log.info("permissions : {}", permissions);
+        grantedAuthorities.add(new SimpleGrantedAuthority(AppConstants.ROLE_PREFIX + roles));
 
         String username = jwt.getClaimAsString(Claims.USERNAME.getValue());
         String email = jwt.getClaimAsString(Claims.EMAIL.getValue());
@@ -40,6 +39,7 @@ public class CustomJwtAuthenticationConverter implements Converter<Jwt, Abstract
                 .username(username)
                 .email(email)
                 .userUuid(userUuid)
+                .role(roles)
                 .authorities(grantedAuthorities)
                 .build();
 

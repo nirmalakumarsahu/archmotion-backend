@@ -19,6 +19,7 @@ public record CustomUserPrincipal(
         String username,
         String password,
         String email,
+        String role,
         Collection<? extends GrantedAuthority> authorities
 ) implements UserDetails {
 
@@ -29,23 +30,12 @@ public record CustomUserPrincipal(
                 .email(user.getEmail())
                 .password(user.getPassword())
                 .username(user.getUsername())
+                .role(user.getRole().name())
                 .authorities(
                         Collections.singleton(new SimpleGrantedAuthority(
                                 AppConstants.ROLE_PREFIX + user.getRole()))
                 )
                 .build();
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public UUID getUserUuid() {
-        return userUuid;
-    }
-
-    public String getEmail() {
-        return email;
     }
 
     @NullMarked

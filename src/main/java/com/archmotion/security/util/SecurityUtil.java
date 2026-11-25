@@ -26,7 +26,7 @@ public class SecurityUtil {
     }
 
     public UUID getCurrentUserUuid() {
-        return getCurrentUser().getUserUuid();
+        return getCurrentUser().userUuid();
     }
 
 }

@@ -23,7 +23,7 @@ public class AuditorAwareImpl implements AuditorAware<UUID> {
         }
 
         if (authentication.getPrincipal() instanceof CustomUserPrincipal principal) {
-            return Optional.of(principal.getUserUuid());
+            return Optional.of(principal.userUuid());
         }
 
         return Optional.empty();

@@ -45,7 +45,7 @@ public class DiagramServiceImpl implements DiagramService {
     @Override
     public PageResponse<DiagramResponse> getAll(Pageable pageable) {
         CustomUserPrincipal user = SecurityUtil.getCurrentUser();
-        Page<Diagram> diagramResponsePage = diagramRepository.findAllByUserUuid(user.getUserUuid(), pageable);
+        Page<Diagram> diagramResponsePage = diagramRepository.findAllByUserUuid(user.userUuid(), pageable);
 
         return PageResponse.from(
                 diagramResponsePage.map(DiagramMapper::toResponse)

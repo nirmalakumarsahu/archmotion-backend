@@ -27,12 +27,12 @@ public class JwtService {
 
         JwtClaimsSet claims = JwtClaimsSet.builder()
                 .issuer(jwtProperties.issuer())
-                .subject(user.getUserUuid().toString())
+                .subject(user.userUuid().toString())
                 .issuedAt(now)
                 .expiresAt(now.plus(jwtProperties.accessTokenExpiration()))
-                .claim(Claims.USERNAME.getValue(), user.getUsername())
-                .claim(Claims.EMAIL.getValue(), user.getEmail())
-
+                .claim(Claims.USERNAME.getValue(), user.username())
+                .claim(Claims.EMAIL.getValue(), user.email())
+                .claim(Claims.ROLES.getValue(), user.role())
                 .build();
 
         JwsHeader header = JwsHeader.with(SignatureAlgorithm.RS256).build();
